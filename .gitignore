@@ -412,6 +412,11 @@ Temporary Items
 !.yarn/cache
 
 # and uncomment the following lines
+
+
+# Database
+
+*.sqlite
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,node,react,reactnative,yarn
