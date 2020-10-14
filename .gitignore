@@ -417,6 +417,10 @@ Temporary Items
 # Database
 
 *.sqlite
+
+# folders
+
+uploads
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,node,react,reactnative,yarn
