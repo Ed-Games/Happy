@@ -13,13 +13,49 @@ export class createOrphanages1602640901304 implements MigrationInterface {
                     isPrimary: true,
                     isGenerated: true,
                     generationStrategy: 'increment',
-                    
+                },
+
+                {
+                    name: "name",
+                    type: "varchar",
+                },
+
+                {
+                    name: "latitude",
+                    type: "decimal",
+                    scale: 10,
+                    precision: 2,
+                },
+                {
+                    name: "longitude",
+                    type: "decimal",
+                    scale: 10,
+                    precision: 2,
+                },
+                {
+                    name: "about",
+                    type: "text",
+                },
+                {
+                    name: "instructions",
+                    type: "text",
+                },
+                {
+                    name: "open_on_weekends",
+                    type: "boolean",
+                    default: false,
+                },
+                {
+                    name:'opening_hours',
+                    type:'varchar',
                 }
+
             ]
         }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('orphanages')
     }
 
 }
