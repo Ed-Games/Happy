@@ -7,6 +7,7 @@ import {useRoute} from '@react-navigation/native'
 import mapMarkerImg from '../images/mapMarker.png';
 import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import api from '../services/api';
+import * as Mailcomposer from 'expo-mail-composer'
 
 
 interface OrphanageDetailsRouteParams{
@@ -23,6 +24,8 @@ interface Orphanage{
     instructions: string,
     opening_hours: string,
     open_on_weekends: boolean,
+    whatsapp: string,
+    email: string,
     images: Array<{
         id: number,
         url: string,
@@ -52,6 +55,19 @@ export default function OrphanageDetails() {
       }
   function handleOpenGoogleMapRoutes(){
       Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${orphanage?.latitude},${orphanage?.longitude}`)
+  }
+
+  function handleWhatsapp(){
+    Linking.openURL(`https://api.whatsapp.com/send?phone=${orphanage?.whatsapp}`)
+  }
+
+  function handleComposeMail(){
+    if (orphanage){
+      Mailcomposer.composeAsync({
+        subject: 'Gostaria de visitar o orfanato',
+        recipients: [orphanage.email]
+      })
+    }
   }
 
   return (
@@ -123,10 +139,15 @@ export default function OrphanageDetails() {
 
         </View>
 
-       { /*<RectButton style={styles.contactButton} onPress={() => {}}>
+      <RectButton style={styles.contactButtonWhatsapp} onPress={handleWhatsapp}>
           <FontAwesome name="whatsapp" size={24} color="#FFF" />
           <Text style={styles.contactButtonText}>Entrar em contato</Text>
-            </RectButton>*/}
+      </RectButton>
+
+      <RectButton style={styles.contactButtonEmail} onPress={handleComposeMail}>
+          <Feather name="mail" size={24} color="#FFF" />
+          <Text style={styles.contactButtonText}>Entrar em contato</Text>
+      </RectButton>
       </View>
     </ScrollView>
   )
@@ -245,8 +266,17 @@ const styles = StyleSheet.create({
     color: '#FF6690'
   },
 
-  contactButton: {
+  contactButtonWhatsapp: {
     backgroundColor: '#3CDC8C',
+    borderRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 56,
+    marginTop: 40,
+  },
+  contactButtonEmail: {
+    backgroundColor: '#FF6690',
     borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'center',
