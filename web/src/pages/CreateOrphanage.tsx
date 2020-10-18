@@ -18,6 +18,8 @@ export default function CreateOrphanage() {
   })
 
   const [name, setname] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
+  const [email, setEmail] = useState('')
   const [about, setAbout] = useState('')
   const [instructions, setInstructions] = useState('')
   const [opening_hours, setOpening_hours] = useState('')
@@ -62,6 +64,8 @@ export default function CreateOrphanage() {
     data.append('about', about)
     data.append('instructions', instructions)
     data.append('opening_hours', opening_hours)
+    data.append('whatsapp', whatsapp)
+    data.append('email',email)
     data.append('open_on_weekends', String(open_on_weekends))
     
     images.forEach(image => {
@@ -124,6 +128,22 @@ export default function CreateOrphanage() {
               id="name" 
               value={name} 
               onChange={e => setname(e.target.value)} />
+            </div>
+
+            <div className="input-block">
+              <label htmlFor="name">Email</label>
+              <input 
+              id="name" 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} />
+            </div>
+
+            <div className="input-block">
+              <label htmlFor="name">Whatsapp</label>
+              <input 
+              id="name" 
+              value={whatsapp} 
+              onChange={e => setWhatsapp(e.target.value)} />
             </div>
 
             <div className="input-block">
